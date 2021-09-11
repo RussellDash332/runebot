@@ -4,8 +4,8 @@ waiting_list_*
 *.jpg
 *.gif
 *.mp4
-env.py
 *.tsv
+env.py
 
 runes.py
 PyGif.py
