@@ -7,7 +7,6 @@ waiting_list_*
 env.py
 *.tsv
 
-# CS1010S copyright :')
 runes.py
 PyGif.py
 graphics.py
