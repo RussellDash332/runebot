@@ -1,0 +1,13 @@
+__pycache__/
+waiting_list_*
+*.png
+*.jpg
+*.gif
+*.mp4
+env.py
+*.tsv
+
+# CS1010S copyright :')
+runes.py
+PyGif.py
+graphics.py
