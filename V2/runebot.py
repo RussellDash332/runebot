@@ -50,152 +50,179 @@ def start(update, context):
 
 def show_rune(update, context):
     try:
-        msg_id = update.message.message_id
-    except:
-        pass
-    if context.args:
-        success = 1
+        clear_all()
         try:
-            cmd = " ".join(context.args)
-            
-            if overlap(bans, cmd):
-                raise(Exception(error_msg))
-            rune = eval(cmd, globals())
-
-            show(rune)
-            save_image(f"data/show_{update.message.chat['id']}")
-            clear_all()
-            try:
-                update.message.reply_photo(open(f"data/show_{update.message.chat['id']}.png", 'rb'), reply_to_message_id = msg_id)
-            except:
-                update.message.reply_photo(open(f"data/show_{update.message.chat['id']}.png", 'rb'))
-        except Exception as e:
-            success -= 1
-            try:
-                update.message.reply_text(f'Sorry, it seems that there is an error. Try again.\n<b>Note:</b> {e}', parse_mode = "HTML", reply_to_message_id = msg_id)
-            except:
-                update.message.reply_text(f'Sorry, it seems that there is an error. Try again.\n<b>Note:</b> {e}', parse_mode = "HTML")
-
-        if log_it:
-            with open("data/_log_full.tsv", "a") as f:
-                f.write(f"{update.message.chat['username']}{DELIMITER}{update.message.chat['id']}{DELIMITER}{msg_id}{DELIMITER}show{DELIMITER}{cmd}{DELIMITER}{success}\n")
-                f.close()
-    else:
-        try:
-            update.message.reply_text('Sorry, please give me something to show.', reply_to_message_id = msg_id)
+            msg_id = update.message.message_id
         except:
-            update.message.reply_text('Sorry, please give me something to show.')
+            pass
+        if context.args:
+            success = 1
+            try:
+                cmd = " ".join(context.args)
+                
+                if overlap(bans, cmd):
+                    raise(Exception(error_msg))
+                rune = eval(cmd, globals())
+
+                show(rune)
+                save_image(f"data/show_{update.message.chat['id']}")
+                clear_all()
+                try:
+                    update.message.reply_photo(open(f"data/show_{update.message.chat['id']}.png", 'rb'), reply_to_message_id = msg_id)
+                except:
+                    update.message.reply_photo(open(f"data/show_{update.message.chat['id']}.png", 'rb'))
+            except Exception as e:
+                success -= 1
+                if e.__class__.__name__ == "RecursionError":
+                    e = "RecursionError! Probably input number too high, I'm not that strong :("
+                try:
+                    update.message.reply_text(f'Sorry, it seems that there is an error. Try again.\n<b>Note:</b> {e}', parse_mode = "HTML", reply_to_message_id = msg_id)
+                except:
+                    update.message.reply_text(f'Sorry, it seems that there is an error. Try again.\n<b>Note:</b> {e}', parse_mode = "HTML")
+
+            if log_it:
+                with open("data/_log_full.tsv", "a") as f:
+                    f.write(f"{update.message.chat['username']}{DELIMITER}{update.message.chat['id']}{DELIMITER}{msg_id}{DELIMITER}show{DELIMITER}{cmd}{DELIMITER}{success}\n")
+                    f.close()
+        else:
+            try:
+                update.message.reply_text('Sorry, please give me something to show.', reply_to_message_id = msg_id)
+            except:
+                update.message.reply_text('Sorry, please give me something to show.')
+    except:
+        update.message.reply_text("BadRequest error. Please try another query.")
 
 def anaglyph_rune(update, context):
     try:
-        msg_id = update.message.message_id
-    except:
-        pass
-    if context.args:
-        success = 1
+        clear_all()
         try:
-            cmd = " ".join(context.args)
-                    
-            if overlap(bans, cmd):
-                raise(Exception(error_msg))
-            rune = eval(cmd, globals())
-            
-            anaglyph(rune)
-            save_image(f"data/anaglyph_{update.message.chat['id']}")
-            clear_all()
-            try:
-                update.message.reply_photo(open(f"data/anaglyph_{update.message.chat['id']}.png", 'rb'), reply_to_message_id = msg_id)
-            except:
-                update.message.reply_photo(open(f"data/anaglyph_{update.message.chat['id']}.png", 'rb'))
-        except Exception as e:
-            success -= 1
-            try:
-                update.message.reply_text(f'Sorry, it seems that there is an error. Try again.\n<b>Note:</b> {e}', parse_mode = "HTML", reply_to_message_id = msg_id)
-            except:
-                update.message.reply_text(f'Sorry, it seems that there is an error. Try again.\n<b>Note:</b> {e}', parse_mode = "HTML")
-
-        if log_it:
-            with open("data/_log_full.tsv", "a") as f:
-                f.write(f"{update.message.chat['username']}{DELIMITER}{update.message.chat['id']}{DELIMITER}{msg_id}{DELIMITER}anaglyph{DELIMITER}{cmd}{DELIMITER}{success}\n")
-                f.close()
-    else:
-        try:
-            update.message.reply_text('Sorry, please give me something to show.', reply_to_message_id = msg_id)
+            msg_id = update.message.message_id
         except:
-            update.message.reply_text('Sorry, please give me something to show.')
+            pass
+        if context.args:
+            success = 1
+            try:
+                cmd = " ".join(context.args)
+                        
+                if overlap(bans, cmd):
+                    raise(Exception(error_msg))
+                rune = eval(cmd, globals())
+                
+                anaglyph(rune)
+                save_image(f"data/anaglyph_{update.message.chat['id']}")
+                clear_all()
+                try:
+                    update.message.reply_photo(open(f"data/anaglyph_{update.message.chat['id']}.png", 'rb'), reply_to_message_id = msg_id)
+                except:
+                    update.message.reply_photo(open(f"data/anaglyph_{update.message.chat['id']}.png", 'rb'))
+            except Exception as e:
+                success -= 1
+                if e.__class__.__name__ == "RecursionError":
+                    e = "RecursionError! Probably input number too high, I'm not that strong :("
+                try:
+                    update.message.reply_text(f'Sorry, it seems that there is an error. Try again.\n<b>Note:</b> {e}', parse_mode = "HTML", reply_to_message_id = msg_id)
+                except:
+                    update.message.reply_text(f'Sorry, it seems that there is an error. Try again.\n<b>Note:</b> {e}', parse_mode = "HTML")
+
+            if log_it:
+                with open("data/_log_full.tsv", "a") as f:
+                    f.write(f"{update.message.chat['username']}{DELIMITER}{update.message.chat['id']}{DELIMITER}{msg_id}{DELIMITER}anaglyph{DELIMITER}{cmd}{DELIMITER}{success}\n")
+                    f.close()
+        else:
+            try:
+                update.message.reply_text('Sorry, please give me something to show.', reply_to_message_id = msg_id)
+            except:
+                update.message.reply_text('Sorry, please give me something to show.')
+    except:
+        update.message.reply_text("BadRequest error. Please try another query.")
 
 def hollusion_rune(update, context):
     try:
-        msg_id = update.message.message_id
-    except:
-        pass
-    if context.args:
-        success = 1
+        clear_all()
         try:
-            cmd = " ".join(context.args)
-                    
-            if overlap(bans, cmd):
-                raise(Exception(error_msg))
-            rune = eval(cmd, globals())
-            
-            hollusion(rune)
-            save_hollusion(f"data/hollusion_{update.message.chat['id']}")
-            clear_all()
-            try:
-                update.message.reply_animation(open(f"data/hollusion_{update.message.chat['id']}.gif", 'rb'), reply_to_message_id = msg_id)
-            except:
-                update.message.reply_animation(open(f"data/hollusion_{update.message.chat['id']}.gif", 'rb'))
-        except Exception as e:
-            success -= 1
-            try:
-                update.message.reply_text(f'Sorry, it seems that there is an error. Try again.\n<b>Note:</b> {e}', parse_mode = "HTML", reply_to_message_id = msg_id)
-            except:
-                update.message.reply_text(f'Sorry, it seems that there is an error. Try again.\n<b>Note:</b> {e}', parse_mode = "HTML")
-
-        if log_it:
-            with open("data/_log_full.tsv", "a") as f:
-                f.write(f"{update.message.chat['username']}{DELIMITER}{update.message.chat['id']}{DELIMITER}{msg_id}{DELIMITER}hollusion{DELIMITER}{cmd}{DELIMITER}{success}\n")
-                f.close()
-    else:
-        try:
-            update.message.reply_text('Sorry, please give me something to show.', reply_to_message_id = msg_id)
+            msg_id = update.message.message_id
         except:
-            update.message.reply_text('Sorry, please give me something to show.')
+            pass
+        if context.args:
+            success = 1
+            try:
+                cmd = " ".join(context.args)
+                        
+                if overlap(bans, cmd):
+                    raise(Exception(error_msg))
+                rune = eval(cmd, globals())
+                
+                hollusion(rune)
+                save_hollusion(f"data/hollusion_{update.message.chat['id']}")
+                clear_all()
+                try:
+                    update.message.reply_animation(open(f"data/hollusion_{update.message.chat['id']}.gif", 'rb'), reply_to_message_id = msg_id)
+                except:
+                    update.message.reply_animation(open(f"data/hollusion_{update.message.chat['id']}.gif", 'rb'))
+            except Exception as e:
+                success -= 1
+                if e.__class__.__name__ == "RecursionError":
+                    e = "RecursionError! Probably input number too high, I'm not that strong :("
+                try:
+                    update.message.reply_text(f'Sorry, it seems that there is an error. Try again.\n<b>Note:</b> {e}', parse_mode = "HTML", reply_to_message_id = msg_id)
+                except:
+                    update.message.reply_text(f'Sorry, it seems that there is an error. Try again.\n<b>Note:</b> {e}', parse_mode = "HTML")
+
+            if log_it:
+                with open("data/_log_full.tsv", "a") as f:
+                    f.write(f"{update.message.chat['username']}{DELIMITER}{update.message.chat['id']}{DELIMITER}{msg_id}{DELIMITER}hollusion{DELIMITER}{cmd}{DELIMITER}{success}\n")
+                    f.close()
+        else:
+            try:
+                update.message.reply_text('Sorry, please give me something to show.', reply_to_message_id = msg_id)
+            except:
+                update.message.reply_text('Sorry, please give me something to show.')
+    except:
+        update.message.reply_text("BadRequest error. Please try another query.")
 
 def stereogram_rune(update, context):
-    msg_id = update.message.message_id
-    if context.args:
-        success = 1
+    try:
+        clear_all()
         try:
-            cmd = " ".join(context.args)
-                    
-            if overlap(bans, cmd):
-                raise(Exception(error_msg))
-            rune = eval(cmd, globals())
-            
-            stereogram(rune)
-            save_image(f"data/stereogram_{update.message.chat['id']}")
-            clear_all()
-            try:
-                update.message.reply_photo(open(f"data/stereogram_{update.message.chat['id']}.png", 'rb'), reply_to_message_id = msg_id)
-            except:
-                update.message.reply_photo(open(f"data/stereogram_{update.message.chat['id']}.png", 'rb'))
-        except Exception as e:
-            success -= 1
-            try:
-                update.message.reply_text(f'Sorry, it seems that there is an error. Try again.\n<b>Note:</b> {e}', parse_mode = "HTML", reply_to_message_id = msg_id)
-            except:
-                update.message.reply_text(f'Sorry, it seems that there is an error. Try again.\n<b>Note:</b> {e}', parse_mode = "HTML")
-
-        if log_it:
-            with open("data/_log_full.tsv", "a") as f:
-                f.write(f"{update.message.chat['username']}{DELIMITER}{update.message.chat['id']}{DELIMITER}{msg_id}{DELIMITER}stereogram{DELIMITER}{cmd}{DELIMITER}{success}\n")
-                f.close()
-    else:
-        try:
-            update.message.reply_text('Sorry, please give me something to show.', reply_to_message_id = msg_id)
+            msg_id = update.message.message_id
         except:
-            update.message.reply_text('Sorry, please give me something to show.')
+            pass
+        if context.args:
+            success = 1
+            try:
+                cmd = " ".join(context.args)
+                        
+                if overlap(bans, cmd):
+                    raise(Exception(error_msg))
+                rune = eval(cmd, globals())
+                
+                stereogram(rune)
+                save_image(f"data/stereogram_{update.message.chat['id']}")
+                clear_all()
+                try:
+                    update.message.reply_photo(open(f"data/stereogram_{update.message.chat['id']}.png", 'rb'), reply_to_message_id = msg_id)
+                except:
+                    update.message.reply_photo(open(f"data/stereogram_{update.message.chat['id']}.png", 'rb'))
+            except Exception as e:
+                success -= 1
+                if e.__class__.__name__ == "RecursionError":
+                    e = "RecursionError! Probably input number too high, I'm not that strong :("
+                try:
+                    update.message.reply_text(f'Sorry, it seems that there is an error. Try again.\n<b>Note:</b> {e}', parse_mode = "HTML", reply_to_message_id = msg_id)
+                except:
+                    update.message.reply_text(f'Sorry, it seems that there is an error. Try again.\n<b>Note:</b> {e}', parse_mode = "HTML")
+
+            if log_it:
+                with open("data/_log_full.tsv", "a") as f:
+                    f.write(f"{update.message.chat['username']}{DELIMITER}{update.message.chat['id']}{DELIMITER}{msg_id}{DELIMITER}stereogram{DELIMITER}{cmd}{DELIMITER}{success}\n")
+                    f.close()
+        else:
+            try:
+                update.message.reply_text('Sorry, please give me something to show.', reply_to_message_id = msg_id)
+            except:
+                update.message.reply_text('Sorry, please give me something to show.')
+    except:
+        update.message.reply_text("BadRequest error. Please try another query.")
 
 def do():
     updater = Updater(token=TOKEN, use_context=True)
