@@ -1,4 +1,4 @@
-name: Run bot V1 (deprecated)
+name: Run bot V1 (unused and superseded)
 
 on:
   push:
