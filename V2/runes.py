@@ -31,14 +31,14 @@ rp = graphics.open_pixmap("RightPort", viewport_size, viewport_size)
 def clear_all():
         for rune in secret_runes:
                 exec(os.environ[rune], globals())
-	global active_hollusion
-	global vp, lp, rp
-	if(active_hollusion != None):
-		active_hollusion("kill")
-		active_hollusion = None
-	graphics.clear_viewport(vp)
-	graphics.clear_viewport(lp)
-	graphics.clear_viewport(rp)
+        global active_hollusion
+        global vp, lp, rp
+        if(active_hollusion != None):
+                active_hollusion("kill")
+                active_hollusion = None
+        graphics.clear_viewport(vp)
+        graphics.clear_viewport(lp)
+        graphics.clear_viewport(rp)
 
 class Frame:
 	def __init__(self, p0, p1, p2, z1, z2):
