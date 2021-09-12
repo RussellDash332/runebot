@@ -1,4 +1,7 @@
-from env import TOKEN, DELIMITER
+# from env import TOKEN, DELIMITER
+import os
+TOKEN, DELIMITER = os.environ['TOKEN'], os.environ['DELIMITER']
+
 from runes import *
 
 from telegram.ext import Updater, CommandHandler
@@ -23,25 +26,34 @@ def overlap(arr, string):
 
 def start(update, context):
     welcome_txt = [
-        "*Welcome to the Rune Compiler!*",
+        "*Welcome to the official Rune Compiler Bot!*",
         "",
         "Compile your rune here! Here's a sample execution:",
         "/show heart\_bb",
-        "/anaglyph heart\_bb",
-        "/hollusion heart\_bb",
-        "/stereogram heart\_bb",
+        "/anaglyph circle\_bb",
+        "/hollusion nova\_bb",
+        "/stereogram sail\_bb",
         "",
-        "Supported functions:",
-        "`mosaic(a, b, c, d)`",
-        "`simple_fractal(rune)`",
-        "`egyptian(rune, n)`",
-        "`fractal(rune, n)`",
-        "`dual_fractal(pic1, pic2, n)`",
-        "`steps(a, b, c, d)`",
-        "`tree(n, rune)`",
-        "`helix(rune, n)`",
+        "Other supported functions:",
+        "`beside(r1, r2)`",
+        "`stack(r1, r2)`",
+        "`stackn(n, rune)`",
+        "`overlay(r1, r2)`",
+        "`stack_frac(frac, r1, r2)`",
+        "`overlay_frac(frac, r1, r2)`",
+        "`rotate(rad, rune)`",
+        "`quarter_turn_right(rune)`",
+        "`turn_upside_down(rune)`",
+        "`quarter_turn_left(rune)`",
+        "`flip_vert(rune)`",
+        "`flip_horiz(rune)`",
+        "`make_cross(rune)`",
+        "`scale_independent(x_ratio, y_ratio, rune)`",
+        "`scale(ratio, rune)`",
+        "`translate(x, y, rune)`",
+        "`repeat_pattern(n, pattern, rune)`",
         "`cs1010s(rune)`",
-        "`number(n, rune=circle_bb)`",
+        "`number(n, rune = circle_bb)`",
         "",
         "*Note:* Please use `sqrt` instead of `math.sqrt` or `randint` instead of `random.randint`!",
         ]
