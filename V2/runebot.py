@@ -1,4 +1,5 @@
 # from env import TOKEN, DELIMITER
+from V2.runes import save_hollusion
 import os
 TOKEN, DELIMITER = os.environ['TOKEN'], os.environ['DELIMITER']
 
@@ -17,7 +18,7 @@ bans = ["exec", "eval", "import", "with", "code",
         "doc", "package", "loader", "class", "debug", "raise",
         "input", "dir", "try", "except", "staticmethod", "help",
         "builtin", "attr"]
-log_it = True
+log_it = False # set to False because GitHub Actions won't log it anyway
 
 def overlap(arr, string):
     for i in arr:
@@ -79,9 +80,8 @@ def show_rune(update, context):
 
                 show(rune)
                 bio = BytesIO()
-                bio = BytesIO()
-                bio.name = f"show_{update.message.chat['id']}.png"
-                vp[1].save(bio, 'PNG')
+                bio.name = f"show_{update.message.chat['id']}.png" # dummy name?
+                # vp[1].save(bio, 'PNG')
                 bio.seek(0)
                 clear_all()
                 try:
@@ -126,12 +126,15 @@ def anaglyph_rune(update, context):
                 rune = eval(cmd, globals())
                 
                 anaglyph(rune)
-                save_image(f"data/anaglyph_{update.message.chat['id']}")
+                bio = BytesIO()
+                bio.name = f"anaglyph_{update.message.chat['id']}.png" # dummy name?
+                # vp[1].save(bio, 'PNG')
+                bio.seek(0)
                 clear_all()
                 try:
-                    update.message.reply_photo(open(f"data/anaglyph_{update.message.chat['id']}.png", 'rb'), reply_to_message_id = msg_id)
+                    update.message.reply_photo(bio, reply_to_message_id = msg_id)
                 except:
-                    update.message.reply_photo(open(f"data/anaglyph_{update.message.chat['id']}.png", 'rb'))
+                    update.message.reply_photo(bio)
             except Exception as e:
                 success -= 1
                 if e.__class__.__name__ == "RecursionError":
@@ -170,12 +173,15 @@ def hollusion_rune(update, context):
                 rune = eval(cmd, globals())
                 
                 hollusion(rune)
-                save_hollusion(f"data/hollusion_{update.message.chat['id']}")
+                bio = BytesIO()
+                bio.name = f"hollusion_{update.message.chat['id']}.gif" # dummy name?
+                save_hollusion(bio.name).save(bio, 'gif')
+                bio.seek(0)
                 clear_all()
                 try:
-                    update.message.reply_animation(open(f"data/hollusion_{update.message.chat['id']}.gif", 'rb'), reply_to_message_id = msg_id)
+                    update.message.reply_animation(bio, reply_to_message_id = msg_id)
                 except:
-                    update.message.reply_animation(open(f"data/hollusion_{update.message.chat['id']}.gif", 'rb'))
+                    update.message.reply_animation(bio)
             except Exception as e:
                 success -= 1
                 if e.__class__.__name__ == "RecursionError":
@@ -214,12 +220,15 @@ def stereogram_rune(update, context):
                 rune = eval(cmd, globals())
                 
                 stereogram(rune)
-                save_image(f"data/stereogram_{update.message.chat['id']}")
+                bio = BytesIO()
+                bio.name = f"stereogram_{update.message.chat['id']}.png" # dummy name?
+                # vp[1].save(bio, 'PNG')
+                bio.seek(0)
                 clear_all()
                 try:
-                    update.message.reply_photo(open(f"data/stereogram_{update.message.chat['id']}.png", 'rb'), reply_to_message_id = msg_id)
+                    update.message.reply_photo(bio, reply_to_message_id = msg_id)
                 except:
-                    update.message.reply_photo(open(f"data/stereogram_{update.message.chat['id']}.png", 'rb'))
+                    update.message.reply_photo(bio)
             except Exception as e:
                 success -= 1
                 if e.__class__.__name__ == "RecursionError":

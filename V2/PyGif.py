@@ -617,7 +617,8 @@ def saveAnimated(filename, imgs, delay):
 	gif = PyGif(width, height)
 	gif.setGlobalPalette(gif.PaletteGrayscale)
 	gif.addImages(imgs, delay)
-	gif.saveGif(filename)
+	#gif.saveGif(filename)
+	return gif
 	#print("Saved as "+filename)
 	
 

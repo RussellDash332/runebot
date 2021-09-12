@@ -659,7 +659,7 @@ def save_hollusion(filename):
 			rev = frames[1:len(frames)-1]
 			rev.reverse()
 			frames.extend(rev)
-			PyGif.saveAnimated(filename, frames, 1/len(frames))
+			return PyGif.saveAnimated(filename, frames, 1/len(frames))
 	else:
 		print("PIL does not appear to be available")
 
