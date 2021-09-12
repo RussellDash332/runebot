@@ -3,6 +3,7 @@ import os
 TOKEN, DELIMITER = os.environ['TOKEN'], os.environ['DELIMITER']
 
 from runes import *
+from PIL import Image
 from io import BytesIO
 
 from telegram.ext import Updater, CommandHandler
@@ -176,7 +177,7 @@ def hollusion_rune(update, context):
                 bio.name = f"hollusion_{update.message.chat['id']}.gif" # dummy name?
                 bio = save_hollusion(bio, bio.name)
                 bio.seek(0)
-                bio = Image.open(bio)
+                bio = PIL.Image.open
                 clear_all()
                 try:
                     update.message.reply_animation(bio, reply_to_message_id = msg_id)
