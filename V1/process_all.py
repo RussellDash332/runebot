@@ -24,7 +24,7 @@ for command in commands:
                                   data={'chat_id': chat_id, 'reply_to_message_id': msg_id},
                                   files={'photo': open(f"data/{command}.png", 'rb')})
             except Exception as e:
-                print(e)
+                print(e) # for logging
             clear_all()
 
     open(f"data/waiting_list_{command}.txt", "w").close() # clean content
