@@ -623,7 +623,7 @@ def saveAnimated(filename, imgs, delay):
 	#print("Saved as "+filename)
 
 def saveGIF(bio, filename, frames, delay):
-	frames[0].save(bio, format='GIF', save_all=True, append_images=frames[1:], delay=delay, loop=0)
+	frames[0].save(bio, format='gif', save_all=True, append_images=frames[1:], delay=delay, loop=0)
 	return bio
 
 
