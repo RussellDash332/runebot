@@ -3,6 +3,7 @@ import os
 TOKEN, DELIMITER = os.environ['TOKEN'], os.environ['DELIMITER']
 
 from runes import *
+from io import BytesIO
 
 from telegram.ext import Updater, CommandHandler
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
@@ -77,12 +78,16 @@ def show_rune(update, context):
                 rune = eval(cmd, globals())
 
                 show(rune)
-                save_image(f"data/show_{update.message.chat['id']}")
+                bio = BytesIO()
+                bio = BytesIO()
+                bio.name = f"show_{update.message.chat['id']}.png"
+                vp[1].save(bio, 'PNG')
+                bio.seek(0)
                 clear_all()
                 try:
-                    update.message.reply_photo(open(f"data/show_{update.message.chat['id']}.png", 'rb'), reply_to_message_id = msg_id)
+                    update.message.reply_photo(bio, reply_to_message_id = msg_id)
                 except:
-                    update.message.reply_photo(open(f"data/show_{update.message.chat['id']}.png", 'rb'))
+                    update.message.reply_photo(bio)
             except Exception as e:
                 success -= 1
                 if e.__class__.__name__ == "RecursionError":
