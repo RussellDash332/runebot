@@ -174,7 +174,8 @@ def hollusion_rune(update, context):
                 hollusion(rune)
                 bio = BytesIO()
                 bio.name = f"hollusion_{update.message.chat['id']}.gif" # dummy name?
-                save_hollusion(bio, bio.name)
+                bio = save_hollusion(bio, bio.name)
+                bio.seek(0)
                 clear_all()
                 try:
                     update.message.reply_animation(bio, reply_to_message_id = msg_id)
