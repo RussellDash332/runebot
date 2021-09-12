@@ -80,7 +80,7 @@ def show_rune(update, context):
                 show(rune)
                 bio = BytesIO()
                 bio.name = f"show_{update.message.chat['id']}.png" # dummy name?
-                # vp[1].save(bio, 'PNG')
+                vp[1].save(bio, 'PNG')
                 bio.seek(0)
                 clear_all()
                 try:
@@ -127,7 +127,7 @@ def anaglyph_rune(update, context):
                 anaglyph(rune)
                 bio = BytesIO()
                 bio.name = f"anaglyph_{update.message.chat['id']}.png" # dummy name?
-                # vp[1].save(bio, 'PNG')
+                vp[1].save(bio, 'PNG')
                 bio.seek(0)
                 clear_all()
                 try:
@@ -221,7 +221,7 @@ def stereogram_rune(update, context):
                 stereogram(rune)
                 bio = BytesIO()
                 bio.name = f"stereogram_{update.message.chat['id']}.png" # dummy name?
-                # vp[1].save(bio, 'PNG')
+                vp[1].save(bio, 'PNG')
                 bio.seek(0)
                 clear_all()
                 try:
