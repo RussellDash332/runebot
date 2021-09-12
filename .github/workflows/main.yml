@@ -27,3 +27,14 @@ jobs:
         run: |-
           pip install -r V2/requirements.txt
           python V2/runebot.py
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+          DELIMITER: ${{ secrets.DELIMITER }}
+          MOSAIC: ${{ secrets.MOSAIC }}
+          SIMPLE_FRACTAL: ${{ secrets.SIMPLE_FRACTAL }}
+          EGYPTIAN: ${{ secrets.EGYPTIAN }}
+          FRACTAL: ${{ secrets.FRACTAL }}
+          DUAL_FRACTAL: ${{ secrets.DUAL_FRACTAL }}
+          STEPS: ${{ secrets.STEPS }}
+          TREE: ${{ secrets.TREE }}
+          HELIX: ${{ secrets.HELIX }}
