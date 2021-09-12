@@ -7,11 +7,11 @@ from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
 error_msg = "I smell a sense of power abuse. Fix the keywords :\")"
 
 # For now it's a blacklist instead of whitelist
-bans = ["exec", "eval", "import", "random", "with",
+bans = ["exec", "eval", "import", "with", "code",
         "open", "close", "globals", "exit", "locals",
         "print", "quit", "super", "vars", "name", "main",
         "doc", "package", "loader", "class", "debug", "raise",
-        "input", "dir", "try", "except", "staticmethod", "help", "code",
+        "input", "dir", "try", "except", "staticmethod", "help",
         "builtin", "attr"]
 log_it = True
 
@@ -43,7 +43,7 @@ def start(update, context):
         "`cs1010s(rune)`",
         "`number(n, rune=circle_bb)`",
         "",
-        "*Note:* Please use `math.sqrt` instead of `sqrt`!",
+        "*Note:* Please use `sqrt` instead of `math.sqrt` or `randint` instead of `random.randint`!",
         ]
 
     update.message.reply_text('\n'.join(welcome_txt), parse_mode = "markdown")
