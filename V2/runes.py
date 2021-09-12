@@ -649,8 +649,6 @@ def stereogram(painter):
 def save_image(filename):
 	graphics.saveImage(vp, filename)
 
-# Slight modification by passing the BytesIO object
-# def save_hollusion(bio, filename):
 def save_hollusion(filename):
 	if graphics.PIL_available:
 		if active_hollusion == None:
@@ -662,7 +660,6 @@ def save_hollusion(filename):
 			rev.reverse()
 			frames.extend(rev)
 			PyGif.saveAnimated(filename, frames, 1/len(frames))
-			# return PyGif.saveGIF(bio, filename, frames, 1/len(frames))
 	else:
 		print("PIL does not appear to be available")
 

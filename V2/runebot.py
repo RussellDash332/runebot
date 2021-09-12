@@ -3,8 +3,6 @@ import os
 TOKEN, DELIMITER = os.environ['TOKEN'], os.environ['DELIMITER']
 
 from runes import *
-from PIL import Image
-from io import BytesIO
 
 from telegram.ext import Updater, CommandHandler
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
@@ -79,15 +77,12 @@ def show_rune(update, context):
                 rune = eval(cmd, globals())
 
                 show(rune)
-                bio = BytesIO()
-                bio.name = f"show_{update.message.chat['id']}.png" # dummy name?
-                vp[1].save(bio, 'PNG')
-                bio.seek(0)
+                save_image(f"show_{update.message.chat['id']}")
                 clear_all()
                 try:
-                    update.message.reply_photo(bio, reply_to_message_id = msg_id)
+                    update.message.reply_photo(open(f"show_{update.message.chat['id']}.png", 'rb'), reply_to_message_id = msg_id)
                 except:
-                    update.message.reply_photo(bio)
+                    update.message.reply_photo(open(f"show_{update.message.chat['id']}.png", 'rb'))
             except Exception as e:
                 success -= 1
                 if e.__class__.__name__ == "RecursionError":
@@ -126,15 +121,12 @@ def anaglyph_rune(update, context):
                 rune = eval(cmd, globals())
                 
                 anaglyph(rune)
-                bio = BytesIO()
-                bio.name = f"anaglyph_{update.message.chat['id']}.png" # dummy name?
-                vp[1].save(bio, 'PNG')
-                bio.seek(0)
+                save_image(f"anaglyph_{update.message.chat['id']}")
                 clear_all()
                 try:
-                    update.message.reply_photo(bio, reply_to_message_id = msg_id)
+                    update.message.reply_photo(open(f"anaglyph_{update.message.chat['id']}.png", 'rb'), reply_to_message_id = msg_id)
                 except:
-                    update.message.reply_photo(bio)
+                    update.message.reply_photo(open(f"anaglyph_{update.message.chat['id']}.png", 'rb'))
             except Exception as e:
                 success -= 1
                 if e.__class__.__name__ == "RecursionError":
@@ -173,20 +165,12 @@ def hollusion_rune(update, context):
                 rune = eval(cmd, globals())
                 
                 hollusion(rune)
-                """
-                bio = BytesIO()
-                bio.name = f"hollusion_{update.message.chat['id']}.gif" # dummy name?
-                bio = save_hollusion(bio, bio.name)
-                bio.seek(0)
-                bio = bio.read()
-                # bio = Image.open(bio)
-                """
-                save_hollusion(f"{update.message.chat['id']}")
+                save_hollusion(f"hollusion_{update.message.chat['id']}")
                 clear_all()
                 try:
-                    update.message.reply_animation(open(f"{update.message.chat['id']}.gif", 'rb'), reply_to_message_id = msg_id)
+                    update.message.reply_animation(open(f"hollusion_{update.message.chat['id']}.gif", 'rb'), reply_to_message_id = msg_id)
                 except:
-                    update.message.reply_animation(open(f"{update.message.chat['id']}.gif", 'rb'))
+                    update.message.reply_animation(open(f"hollusion_{update.message.chat['id']}.gif", 'rb'))
             except Exception as e:
                 success -= 1
                 if e.__class__.__name__ == "RecursionError":
@@ -225,15 +209,12 @@ def stereogram_rune(update, context):
                 rune = eval(cmd, globals())
                 
                 stereogram(rune)
-                bio = BytesIO()
-                bio.name = f"stereogram_{update.message.chat['id']}.png" # dummy name?
-                vp[1].save(bio, 'PNG')
-                bio.seek(0)
+                save_image(f"stereogram_{update.message.chat['id']}")
                 clear_all()
                 try:
-                    update.message.reply_photo(bio, reply_to_message_id = msg_id)
+                    update.message.reply_photo(open(f"stereogram_{update.message.chat['id']}.png", 'rb'), reply_to_message_id = msg_id)
                 except:
-                    update.message.reply_photo(bio)
+                    update.message.reply_photo(open(f"stereogram_{update.message.chat['id']}.png", 'rb'))
             except Exception as e:
                 success -= 1
                 if e.__class__.__name__ == "RecursionError":
