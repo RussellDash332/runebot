@@ -650,7 +650,8 @@ def save_image(filename):
 	graphics.saveImage(vp, filename)
 
 # Slight modification by passing the BytesIO object
-def save_hollusion(bio, filename):
+# def save_hollusion(bio, filename):
+def save_hollusion(filename):
 	if graphics.PIL_available:
 		if active_hollusion == None:
 			raise("No hollusion active")
