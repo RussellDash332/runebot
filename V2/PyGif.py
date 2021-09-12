@@ -271,6 +271,7 @@ RAWMODE = {
 			the Graphic Control Extension.
 """
 
+from io import BytesIO
 from math import sqrt
 from PIL import Image, ImageFile
 
@@ -617,10 +618,14 @@ def saveAnimated(filename, imgs, delay):
 	gif = PyGif(width, height)
 	gif.setGlobalPalette(gif.PaletteGrayscale)
 	gif.addImages(imgs, delay)
-	#gif.saveGif(filename)
-	return gif
+	gif.saveGif(filename)
+
 	#print("Saved as "+filename)
-	
+
+def saveGIF(bio, filename, imgs, delay):
+	frames[0].save(bio, format='GIF', save_all=True, append_images=frames[1:], delay=delay, loop=0)
+	bio.seek(0,2)
+
 
 #test code:
 
