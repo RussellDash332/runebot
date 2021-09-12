@@ -173,17 +173,20 @@ def hollusion_rune(update, context):
                 rune = eval(cmd, globals())
                 
                 hollusion(rune)
+                """
                 bio = BytesIO()
                 bio.name = f"hollusion_{update.message.chat['id']}.gif" # dummy name?
                 bio = save_hollusion(bio, bio.name)
                 bio.seek(0)
                 bio = bio.read()
                 # bio = Image.open(bio)
+                """
+                save_hollusion(f"{update.message.chat['id']}")
                 clear_all()
                 try:
-                    update.message.reply_animation(bio, reply_to_message_id = msg_id)
+                    update.message.reply_animation(open(f"{update.message.chat['id']}.gif", 'rb'), reply_to_message_id = msg_id)
                 except:
-                    update.message.reply_animation(bio)
+                    update.message.reply_animation(open(f"{update.message.chat['id']}.gif", 'rb'))
             except Exception as e:
                 success -= 1
                 if e.__class__.__name__ == "RecursionError":
