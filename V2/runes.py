@@ -1,10 +1,3 @@
-import os
-secret_runes = ['MOSAIC', 'SIMPLE_FRACTAL', 'EGYPTIAN',
-                'FRACTAL', 'DUAL_FRACTAL', 'STEPS',
-                'TREE', 'HELIX']
-for rune in secret_runes:
-        exec(os.environ[rune])
-
 def is_list(lst):
 	return isinstance(lst, (list, tuple))
 
