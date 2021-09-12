@@ -1,5 +1,4 @@
 # from env import TOKEN, DELIMITER
-from V2.runes import save_hollusion
 import os
 TOKEN, DELIMITER = os.environ['TOKEN'], os.environ['DELIMITER']
 
