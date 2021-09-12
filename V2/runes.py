@@ -1,8 +1,8 @@
 import os
 
-secret_runes = ['MOSAIC', 'SIMPLE_FRACTAL', 'EGYPTIAN',
-                'FRACTAL', 'DUAL_FRACTAL', 'STEPS',
-                'TREE', 'HELIX']
+##secret_runes = ['MOSAIC', 'SIMPLE_FRACTAL', 'EGYPTIAN',
+##                'FRACTAL', 'DUAL_FRACTAL', 'STEPS',
+##                'TREE', 'HELIX']
 
 def is_list(lst):
 	return isinstance(lst, (list, tuple))
@@ -29,8 +29,8 @@ lp = graphics.open_pixmap("LeftPort", viewport_size, viewport_size)
 rp = graphics.open_pixmap("RightPort", viewport_size, viewport_size)
 
 def clear_all():
-        for rune in secret_runes:
-                exec(os.environ[rune], globals())
+        #for rune in secret_runes:
+                #exec(os.environ[rune], globals())
         global active_hollusion
         global vp, lp, rp
         if(active_hollusion != None):

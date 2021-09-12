@@ -30,11 +30,11 @@ jobs:
         env:
           TOKEN: ${{ secrets.TOKEN }}
           DELIMITER: ${{ secrets.DELIMITER }}
-          MOSAIC: ${{ secrets.MOSAIC }}
-          SIMPLE_FRACTAL: ${{ secrets.SIMPLE_FRACTAL }}
-          EGYPTIAN: ${{ secrets.EGYPTIAN }}
-          FRACTAL: ${{ secrets.FRACTAL }}
-          DUAL_FRACTAL: ${{ secrets.DUAL_FRACTAL }}
-          STEPS: ${{ secrets.STEPS }}
-          TREE: ${{ secrets.TREE }}
-          HELIX: ${{ secrets.HELIX }}
+          #MOSAIC: ${{ secrets.MOSAIC }}
+          #SIMPLE_FRACTAL: ${{ secrets.SIMPLE_FRACTAL }}
+          #EGYPTIAN: ${{ secrets.EGYPTIAN }}
+          #FRACTAL: ${{ secrets.FRACTAL }}
+          #DUAL_FRACTAL: ${{ secrets.DUAL_FRACTAL }}
+          #STEPS: ${{ secrets.STEPS }}
+          #TREE: ${{ secrets.TREE }}
+          #HELIX: ${{ secrets.HELIX }}
