@@ -1,9 +1,11 @@
-name: Rune Compiler Bot
+name: Refresh Rune Compiler Bot
 
 on:
   push:
     branches:
       - main
+  schedule:
+    - cron: "* */6 * * *" # the bot auto-refreshes every 6 hours
 
 jobs:
   build:
