@@ -28,10 +28,6 @@ secret_runes = ['MOSAIC', 'SIMPLE_FRACTAL', 'EGYPTIAN',
                 'FRACTAL', 'DUAL_FRACTAL', 'STEPS',
                 'TREE', 'HELIX']
 
-for rune in secret_runes:
-    print(os.environ.get(rune), type(os.environ.get(rune)))
-    exec(os.environ.get(rune), globals())
-
 def start(update, context):
     welcome_txt = [
         "*Welcome to the official Rune Compiler Bot!*",
@@ -67,6 +63,8 @@ def start(update, context):
     update.message.reply_text('\n'.join(welcome_txt), parse_mode = "markdown")
 
 def show_rune(update, context):
+    for rune in secret_runes:
+        exec(os.environ.get(rune), globals())
     try:
         clear_all()
         try:
@@ -111,6 +109,8 @@ def show_rune(update, context):
         update.message.reply_text("BadRequest error. Please try another query.")
 
 def anaglyph_rune(update, context):
+    for rune in secret_runes:
+        exec(os.environ.get(rune), globals())
     try:
         clear_all()
         try:
@@ -155,6 +155,8 @@ def anaglyph_rune(update, context):
         update.message.reply_text("BadRequest error. Please try another query.")
 
 def hollusion_rune(update, context):
+    for rune in secret_runes:
+        exec(os.environ.get(rune), globals())
     try:
         clear_all()
         try:
@@ -199,6 +201,8 @@ def hollusion_rune(update, context):
         update.message.reply_text("BadRequest error. Please try another query.")
 
 def stereogram_rune(update, context):
+    for rune in secret_runes:
+        exec(os.environ.get(rune), globals())
     try:
         clear_all()
         try:
