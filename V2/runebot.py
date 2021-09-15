@@ -1,6 +1,6 @@
 # from env import TOKEN, DELIMITER
 import os
-TOKEN, DELIMITER = os.environ['TOKEN'], os.environ['DELIMITER']
+TOKEN, DELIMITER, DP_URL = os.environ['TOKEN'], os.environ['DELIMITER'], os.environ['DP_URL']
 
 from runes import *
 from json import loads
