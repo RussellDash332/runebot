@@ -29,6 +29,7 @@ secret_runes = ['MOSAIC', 'SIMPLE_FRACTAL', 'EGYPTIAN',
                 'TREE', 'HELIX']
 
 for rune in secret_runes:
+    print(os.environ.get(rune), type(os.environ.get(rune)))
     exec(os.environ.get(rune), globals())
 
 def start(update, context):
