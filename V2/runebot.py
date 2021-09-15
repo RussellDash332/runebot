@@ -65,7 +65,8 @@ def start(update, context):
         "`helix(rune, n)`",
         "`cs1010s(rune)`",
         "`number(n, rune = circle_bb)`",
-        "`chess`, still a work in progress!"
+        "`chess()`",
+        "`chess(pieces_str)`",
         "",
         "*Note:* Please use `random` instead of `random.random`!",
         ]

@@ -746,24 +746,34 @@ def number(n, rune = circle_bb):
         return r
 
 # V2.3 by Clarence Chew
-chess = (si:=scale_independent,
-         t:=translate,
-         o:=lambda x:x[0]if len(x)==1 else overlay_frac(0,o(x[:len(x)//2]),o(x[len(x)//2:])),
-         cf:=lambda r:o([r,si(-1,1,r)]),
-         f:=lambda g, n, m: (stack_frac((m//2)/m, f(g, n, m//2), f(lambda x, y: g(x, y+m//2), n, m-m//2))
-                             if m>1 else (quarter_turn_left(f(lambda x, y: quarter_turn_right(g(y, x)), 1, n)) if n>1 else g(0, 0))),
-         chess:=lambda p:(
-                 lambda d,b:overlay_frac(
-                         2/3,
-                         f(lambda x,y:d[p[y*8+x].upper()]if p[y*8+x].upper()in d and p[y*8+x].islower() else blank_bb,8,8),
-                         overlay_frac(1/2,f(lambda x,y:d[p[y*8+x]]if p[y*8+x]in d else blank_bb,8,8),b)))
-         ({"P":o([scale(0.3,circle_bb),t(0,1/4,scale(0.5,cf(sail_bb)))]),
-           "R":o([t(0,-0.1,si(0.5,0.1, number(1010101,black_bb))),si(0.5,0.1,black_bb),t(0,1/4,si(0.4,0.5,black_bb))]),
-           "K":o([t(-0.15,0.2,scale(0.4,circle_bb)),t(0.15, 0.2,scale(0.4,circle_bb)),scale(0.25,make_cross(rcross_bb)),t(0,0.3,scale(0.4,black_bb))]),
-           "Q":cf(o([t(-1/4,0,si(1/3,1/2,sail_bb)),t(-1/12,0,si(1/3,1/2,sail_bb)),t(1/12,0,si(1/3,1/2,sail_bb))])),
-           "B":o([cf(o([t(-1/4,0.1,si(0.1,-2/5,corner_bb)),t(-1/5,-0.1,si(1/5,-2/5,corner_bb)),t(-0.1,-1/4,si(1/5,-0.3,corner_bb))])),
-                  scale(1/5,black_bb),t(0,1/5,si(2/5,1/5,black_bb)),t(0,2/5,si(1/2,1/5,black_bb))]),
-           "N":o([t(-5/32,1/8,si(3/16,3/4,black_bb)),t(-1/16,1/3,si(3/8,1/3,sail_bb)),t(0,-0.1,si(1/8,0.3,black_bb)),
-                  t(1/16,-0.1,si(1/4,0.3,sail_bb)),t(3/16,-1/40,si(1/8,-3/20,cf(sail_bb))),t(1/16,-21/160,si(3/8,1/16,sail_bb)),
-                  t(-1/80,-30/160,si(3/8,1/8,sail_bb))])},f(lambda x,y: [blank_bb,black_bb][(x+y)%2],8,8)),
-         chess("rnbqkbnrpppppppp"+" "*32+"PPPPPPPPRNBQKBNR"))[-1]
+chess = (
+	si:=scale_independent,
+    t:=translate,
+    o:=lambda x:x[0]if len(x)==1 else overlay_frac(0,o(x[:len(x)//2]),o(x[len(x)//2:])),
+    cf:=lambda r:o([r,si(-1,1,r)]),
+    f:=lambda g, n, m: (
+		stack_frac((m//2)/m, f(g, n, m//2), f(lambda x, y: g(x, y+m//2), n, m-m//2)) if m>1 else (
+			quarter_turn_left(f(lambda x, y: quarter_turn_right(g(y, x)), 1, n)) if n>1 else g(0, 0)
+		)
+	),
+	chess:=lambda p="rnbqkbnrpppppppp"+" "*32+"PPPPPPPPRNBQKBNR":(
+		lambda d,b:overlay_frac(
+			2/3,
+			f(lambda x,y:d[p[y*8+x].upper()]if p[y*8+x].upper()in d and p[y*8+x].islower() else blank_bb,8,8),
+			overlay_frac(1/2,f(lambda x,y:d[p[y*8+x]]if p[y*8+x]in d else blank_bb,8,8),b)
+		)
+	)(
+		{
+			"P":o([scale(0.3,circle_bb),t(0,1/4,scale(0.5,cf(sail_bb)))]),
+        	"R":o([t(0,-0.1,si(0.5,0.1, number(1010101,black_bb))),si(0.5,0.1,black_bb),t(0,1/4,si(0.4,0.5,black_bb))]),
+        	"K":o([t(-0.15,0.2,scale(0.4,circle_bb)),t(0.15, 0.2,scale(0.4,circle_bb)),scale(0.25,make_cross(rcross_bb)),t(0,0.3,scale(0.4,black_bb))]),
+        	"Q":cf(o([t(-1/4,0,si(1/3,1/2,sail_bb)),t(-1/12,0,si(1/3,1/2,sail_bb)),t(1/12,0,si(1/3,1/2,sail_bb))])),
+        	"B":o([cf(o([t(-1/4,0.1,si(0.1,-2/5,corner_bb)),t(-1/5,-0.1,si(1/5,-2/5,corner_bb)),t(-0.1,-1/4,si(1/5,-0.3,corner_bb))])),
+				scale(1/5,black_bb),t(0,1/5,si(2/5,1/5,black_bb)),t(0,2/5,si(1/2,1/5,black_bb))]),
+        	"N":o([t(-5/32,1/8,si(3/16,3/4,black_bb)),t(-1/16,1/3,si(3/8,1/3,sail_bb)),t(0,-0.1,si(1/8,0.3,black_bb)),
+            	t(1/16,-0.1,si(1/4,0.3,sail_bb)),t(3/16,-1/40,si(1/8,-3/20,cf(sail_bb))),t(1/16,-21/160,si(3/8,1/16,sail_bb)),
+            	t(-1/80,-30/160,si(3/8,1/8,sail_bb))])
+		},
+		f(lambda x,y: [blank_bb,black_bb][(x+y)%2],8,8)
+	)
+)[-1]
