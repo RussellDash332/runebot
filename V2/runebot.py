@@ -3,6 +3,8 @@ import os
 TOKEN, DELIMITER = os.environ['TOKEN'], os.environ['DELIMITER']
 
 from runes import *
+from json import loads
+from urllib import request, parse
 
 from telegram.ext import Updater, CommandHandler
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
@@ -24,9 +26,16 @@ def overlap(arr, string):
             return True
     return False
 
-secret_runes = ['MOSAIC', 'SIMPLE_FRACTAL', 'EGYPTIAN',
-                'FRACTAL', 'DUAL_FRACTAL', 'STEPS',
-                'TREE', 'HELIX']
+def read_dp():
+	full_url = [DP_URL, '.body.json?lastUpdate=0']
+	with request.urlopen(''.join(full_url)) as response:
+		resp = response.read()
+
+	return loads(resp.decode())['body']
+
+# Secret runes
+for cmd in loads(read_dp())["commands"]:
+    exec(cmd, globals())
 
 def start(update, context):
     welcome_txt = [
@@ -56,15 +65,14 @@ def start(update, context):
         "`helix(rune, n)`",
         "`cs1010s(rune)`",
         "`number(n, rune = circle_bb)`",
+        "`chess`, still a work in progress!"
         "",
-        "*Note:* Please use `sqrt` instead of `math.sqrt` or `randint` instead of `random.randint`!",
+        "*Note:* Please use `random` instead of `random.random`!",
         ]
 
     update.message.reply_text('\n'.join(welcome_txt), parse_mode = "markdown")
 
 def show_rune(update, context):
-    for rune in secret_runes:
-        exec(os.environ.get(rune), globals())
     try:
         clear_all()
         try:
@@ -109,8 +117,6 @@ def show_rune(update, context):
         update.message.reply_text("BadRequest error. Please try another query.")
 
 def anaglyph_rune(update, context):
-    for rune in secret_runes:
-        exec(os.environ.get(rune), globals())
     try:
         clear_all()
         try:
@@ -155,8 +161,6 @@ def anaglyph_rune(update, context):
         update.message.reply_text("BadRequest error. Please try another query.")
 
 def hollusion_rune(update, context):
-    for rune in secret_runes:
-        exec(os.environ.get(rune), globals())
     try:
         clear_all()
         try:
@@ -201,8 +205,6 @@ def hollusion_rune(update, context):
         update.message.reply_text("BadRequest error. Please try another query.")
 
 def stereogram_rune(update, context):
-    for rune in secret_runes:
-        exec(os.environ.get(rune), globals())
     try:
         clear_all()
         try:

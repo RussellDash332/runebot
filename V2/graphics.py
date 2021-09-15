@@ -1,6 +1,7 @@
 def flatten_once(ls):
 	return [element for tupl in ls for element in tupl]
 
+import math
 from math import *
 
 visible = None
