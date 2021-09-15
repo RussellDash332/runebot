@@ -24,6 +24,13 @@ def overlap(arr, string):
             return True
     return False
 
+secret_runes = ['MOSAIC', 'SIMPLE_FRACTAL', 'EGYPTIAN',
+                'FRACTAL', 'DUAL_FRACTAL', 'STEPS',
+                'TREE', 'HELIX']
+
+for rune in secret_runes:
+    exec(os.environ.get(rune), globals())
+
 def start(update, context):
     welcome_txt = [
         "*Welcome to the official Rune Compiler Bot!*",
@@ -42,14 +49,14 @@ def start(update, context):
         "`stack_frac(frac, r1, r2)`",
         "`overlay_frac(frac, r1, r2)`",
         "`make_cross(rune)`",
-        #"`mosaic(a, b, c, d)`",
-        #"`simple_fractal(rune)`",
-        #"`egyptian(rune, n)`",
-        #"`fractal(rune, n)`",
-        #"`dual_fractal(pic1, pic2, n)`",
-        #"`steps(a, b, c, d)`",
-        #"`tree(n, rune)`",
-        #"`helix(rune, n)`",
+        "`mosaic(a, b, c, d)`",
+        "`simple_fractal(rune)`",
+        "`egyptian(rune, n)`",
+        "`fractal(rune, n)`",
+        "`dual_fractal(pic1, pic2, n)`",
+        "`steps(a, b, c, d)`",
+        "`tree(n, rune)`",
+        "`helix(rune, n)`",
         "`cs1010s(rune)`",
         "`number(n, rune = circle_bb)`",
         "",
