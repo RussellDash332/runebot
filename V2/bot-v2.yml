@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  schedule:
+    - cron: "0 */6 * * *" # the bot auto-refreshes every 6 hours
 
 jobs:
   build:
@@ -30,3 +32,11 @@ jobs:
         env:
           TOKEN: ${{ secrets.TOKEN }}
           DELIMITER: ${{ secrets.DELIMITER }}
+          MOSAIC: ${{ secrets.MOSAIC }}
+          SIMPLE_FRACTAL: ${{ secrets.SIMPLE_FRACTAL }}
+          EGYPTIAN: ${{ secrets.EGYPTIAN }}
+          FRACTAL: ${{ secrets.FRACTAL }}
+          DUAL_FRACTAL: ${{ secrets.DUAL_FRACTAL }}
+          STEPS: ${{ secrets.STEPS }}
+          TREE: ${{ secrets.TREE }}
+          HELIX: ${{ secrets.HELIX }}
