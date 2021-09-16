@@ -70,7 +70,7 @@ def start(update, context):
         "`cs1010s(rune)`",
         "`number(n, rune = circle_bb)`",
         "`qr(bytes)`",
-        "`checkerboard(f, cols, rows)`",
+        "`make_grid(f, cols, rows)`",
         "`chess()`",
         "`chess(pieces_str)`, each from `\"PRNBQKprnbqk\"` represents a piece",
         "",

@@ -739,17 +739,17 @@ def number(n, rune = circle_bb):
         return r
 
 # V2.3 by Clarence Chew
-def checkerboard(f = lambda x,y: [blank_bb, black_bb][(x+y) % 2], cols = 8, rows = 8):
+def make_grid(f = lambda x,y: [blank_bb, black_bb][(x+y) % 2], cols = 8, rows = 8):
 	if rows > 1:
-		return stack_frac((rows//2)/rows, checkerboard(f, cols, rows//2), checkerboard(lambda x, y: f(x, y + rows//2), cols, rows - rows//2))
+		return stack_frac((rows//2)/rows, make_grid(f, cols, rows//2), make_grid(lambda x, y: f(x, y + rows//2), cols, rows - rows//2))
 	elif cols > 1:
-		return quarter_turn_left(checkerboard(lambda x, y: quarter_turn_right(f(y, x)), 1, cols))
+		return quarter_turn_left(make_grid(lambda x, y: quarter_turn_right(f(y, x)), 1, cols))
 	else:
 		return f(0, 0)
 
 def qr(bytes):
 	size = int(sqrt(len(bytes)))
-	return checkerboard(lambda x,y: [blank_bb, black_bb][int(bytes[size*y + x])], size, size)
+	return make_grid(lambda x,y: [blank_bb, black_bb][int(bytes[size*y + x])], size, size)
 
 o = lambda x: x[0] if len(x) == 1 else overlay_frac(0, o(x[:len(x)//2]), o(x[len(x)//2:]))
 si = scale_independent
@@ -778,11 +778,11 @@ def chess(piece_str = "rnbqkbnrpppppppp" + " "*32 + "PPPPPPPPRNBQKBNR"):
 	return (
 		lambda d,b: overlay_frac(
 			2/3, 
-			checkerboard(
+			make_grid(
 				lambda x,y: d[piece_str[y*8 + x].upper()] if piece_str[y*8+x].upper() in d and piece_str[y*8 + x].islower() else blank_bb, 8, 8
 			), 
 			overlay_frac(
-				1/2, checkerboard(lambda x,y: d[piece_str[y*8 + x]] if piece_str[y*8 + x] in d else blank_bb, 8, 8), b
+				1/2, make_grid(lambda x,y: d[piece_str[y*8 + x]] if piece_str[y*8 + x] in d else blank_bb, 8, 8), b
 			)
 		)
-	)(chess_dict, checkerboard())
+	)(chess_dict, make_grid())
