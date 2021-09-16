@@ -34,8 +34,12 @@ def read_dp():
 	return loads(resp.decode())['body']
 
 # Secret runes
-for cmd in loads(read_dp())["commands"]:
-    exec(cmd, globals())
+dp_down = False
+try:
+    for cmd in loads(read_dp())["commands"]:
+        exec(cmd, globals())
+except:
+    dp_down = True
 
 def start(update, context):
     welcome_txt = [
@@ -47,15 +51,22 @@ def start(update, context):
         "/hollusion nova\_bb",
         "/stereogram sail\_bb",
         "",
-        "Other supported functions:",
-        "`mosaic(a, b, c, d)`",
-        "`simple_fractal(rune)`",
-        "`egyptian(rune, n)`",
-        "`fractal(rune, n)`",
-        "`dual_fractal(pic1, pic2, n)`",
-        "`steps(a, b, c, d)`",
-        "`tree(n, rune)`",
-        "`helix(rune, n)`",
+        "Other supported functions:"
+    ]
+    
+    if not dp_down:
+        welcome_txt += [
+            "`mosaic(a, b, c, d)`",
+            "`simple_fractal(rune)`",
+            "`egyptian(rune, n)`",
+            "`fractal(rune, n)`",
+            "`dual_fractal(pic1, pic2, n)`",
+            "`steps(a, b, c, d)`",
+            "`tree(n, rune)`",
+            "`helix(rune, n)`",
+        ]
+        
+    welcome_txt += [
         "`cs1010s(rune)`",
         "`number(n, rune = circle_bb)`",
         "`qr(bytes)`",
@@ -67,7 +78,7 @@ def start(update, context):
         "`pawn_bb, rook_bb, knight_bb, bishop_bb, queen_bb, king_bb`",
         "",
         "*Note:* Please use `<random_method>` instead of `random.<random_method>`!",
-        ]
+    ]
 
     update.message.reply_text('\n'.join(welcome_txt), parse_mode = "markdown")
 
