@@ -39,7 +39,7 @@ for cmd in loads(read_dp())["commands"]:
 
 def start(update, context):
     welcome_txt = [
-        "*Welcome to the official Rune Compiler Bot!*",
+        "*Welcome to the official Rune Compiler Bot! (V2.3.1)*",
         "",
         "Compile your rune here! Here's a sample execution:",
         "/show heart\_bb",
@@ -48,13 +48,6 @@ def start(update, context):
         "/stereogram sail\_bb",
         "",
         "Other supported functions:",
-        "`beside(r1, r2)`",
-        "`stack(r1, r2)`",
-        "`stackn(n, rune)`",
-        "`overlay(r1, r2)`",
-        "`stack_frac(frac, r1, r2)`",
-        "`overlay_frac(frac, r1, r2)`",
-        "`make_cross(rune)`",
         "`mosaic(a, b, c, d)`",
         "`simple_fractal(rune)`",
         "`egyptian(rune, n)`",
@@ -65,10 +58,15 @@ def start(update, context):
         "`helix(rune, n)`",
         "`cs1010s(rune)`",
         "`number(n, rune = circle_bb)`",
+        "`qr(bytes)`",
+        "`checkerboard(f, cols, rows)`",
         "`chess()`",
-        "`chess(pieces_str)`",
+        "`chess(pieces_str)`, each from `\"PRNBQKprnbqk\"` represents a piece",
         "",
-        "*Note:* Please use `random` instead of `random.random`!",
+        "*UPDATE: New runes!*",
+        "`pawn_bb, rook_bb, knight_bb, bishop_bb, queen_bb, king_bb`",
+        "",
+        "*Note:* Please use `<random_method>` instead of `random.<random_method>`!",
         ]
 
     update.message.reply_text('\n'.join(welcome_txt), parse_mode = "markdown")

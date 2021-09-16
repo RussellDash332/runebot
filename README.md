@@ -1,6 +1,6 @@
 # Rune Compiler Bot
 
-![Version](https://img.shields.io/badge/version-2.3-blue)
+![Version](https://img.shields.io/badge/version-2.3.1-blue)
 
 This Telegram bot simply compiles your runes, specifically CS1010S runes! Play with functional abstraction and understand why.
 
