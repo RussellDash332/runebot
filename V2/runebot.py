@@ -53,7 +53,7 @@ def start(update, context):
         "",
         "Other supported functions:"
     ]
-    
+    """
     if not dp_down:
         welcome_txt += [
             "`mosaic(a, b, c, d)`",
@@ -65,10 +65,10 @@ def start(update, context):
             "`tree(n, rune)`",
             "`helix(rune, n)`",
         ]
-        
+    """    
     welcome_txt += [
         "`cs1010s(rune)`",
-        "`number(n, rune = circle_bb)`",
+        "`number(n, rune=circle_bb)`",
         "`qr(bytes)`",
         "`make_grid(f, cols, rows)`",
         "`chess()`",

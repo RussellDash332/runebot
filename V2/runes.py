@@ -739,7 +739,7 @@ def number(n, rune = circle_bb):
         return r
 
 # V2.3 by Clarence Chew
-def make_grid(f = lambda x,y: [blank_bb, black_bb][(x+y) % 2], cols = 8, rows = 8):
+def make_grid(f=lambda x,y: [blank_bb, black_bb][(x+y) % 2], cols = 8, rows = 8):
 	if rows > 1:
 		return stack_frac((rows//2)/rows, make_grid(f, cols, rows//2), make_grid(lambda x, y: f(x, y + rows//2), cols, rows - rows//2))
 	elif cols > 1:
@@ -766,7 +766,9 @@ knight_bb = o([t(-5/32, 1/8, si(3/16, 3/4, black_bb)), t(-1/16, 1/3, si(3/8, 1/3
 # Avoid reusal
 del o, cf, si, t
 
-def chess(piece_str = "rnbqkbnrpppppppp" + " "*32 + "PPPPPPPPRNBQKBNR"):
+def chess(piece_str="rnbqkbnrpppppppp" + " "*32 + "PPPPPPPPRNBQKBNR"):
+        if len(piece_str) != 64:
+                raise Exception("Please put a string of length 64.")
 	chess_dict = {
 		"P": pawn_bb,
 		"R": rook_bb,
