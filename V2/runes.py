@@ -767,8 +767,8 @@ knight_bb = o([t(-5/32, 1/8, si(3/16, 3/4, black_bb)), t(-1/16, 1/3, si(3/8, 1/3
 del o, cf, si, t
 
 def chess(piece_str="rnbqkbnrpppppppp" + " "*32 + "PPPPPPPPRNBQKBNR"):
-        if len(piece_str) != 64:
-                raise Exception("Please put a string of length 64.")
+	if len(piece_str) != 64:
+		raise Exception("Please put a string of length 64.")
 	chess_dict = {
 		"P": pawn_bb,
 		"R": rook_bb,
