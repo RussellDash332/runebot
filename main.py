@@ -16,8 +16,11 @@ def overlap(arr, string):
             return True
     return False
 
-for code in json.load(open('secret_runes.json', 'r'))['runes']:
-    exec(code)
+# M1, SQ1.1, M2, SQ2.1
+try:
+    for code in json.load(open('secret_runes.json', 'r'))['runes']: exec(code)
+except:
+    pass
 
 bot = telebot.TeleBot(TOKEN)
 
