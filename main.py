@@ -23,11 +23,13 @@ except:
 bot = telebot.TeleBot(TOKEN)
 telebot.apihelper.SESSION_TIME_TO_LIVE = 5 * 60
 
-def run_thread(t, fn, rune, tle):
+def run_thread(t, fn, rune, status):
     # Set timeout to 10 seconds
-    with timeout(thread=t, terminatefun=lambda: None, seconds=10):
-        fn(rune)
-        tle[0] = False
+    with timeout(thread=t, seconds=10):
+        try: fn(rune)
+        except Exception as e:
+            status[0] = str(e)
+        status[1] = False
 
 def compile(message, fn):
     logging.info(message.__dict__['json'])
@@ -47,12 +49,14 @@ def compile(message, fn):
                 raise Exception("I smell a sense of power abuse. Fix the keywords :\")")
             rune = eval(cmd, globals())
 
-            tle = [True]
-            t = thread_with_trace(target=run_thread, args=(fn, rune, tle), handler=TimeoutError("Ran out of time"))
+            status = [True, True] # all_good, tle
+            t = thread_with_trace(target=run_thread, args=(fn, rune, status), handler=TimeoutError("Ran out of time"))
             t.start()
             t.join()
-            if tle[0]:
-                raise Exception('Rune processing too long :(')
+            if status[0] != True:
+                raise Exception(status[0])
+            elif status[1]:
+                raise TimeoutError('Rune processing too long :(')
 
             if fn != hollusion:
                 bot.send_photo(message.chat.id, vp[1], caption=f'`{cmd}`', parse_mode="markdown")
@@ -64,12 +68,15 @@ def compile(message, fn):
                 bot.send_animation(message.chat.id, open(filename, 'rb'), caption=f'`{cmd}`', parse_mode="markdown")
                 os.remove(filename)
             clear_all()
+            logging.info('Success!')
         except Exception as e:
             if e.__class__.__name__ == "RecursionError":
                 e = "RecursionError! Probably input number too high, I'm not that strong :("
-            bot.reply_to(message, f'Sorry, it seems that there is an error. Try again.\n<b>Note:</b> {e}', parse_mode="HTML")
+            logging.warning(e)
+            bot.reply_to(message, f"Sorry, it seems that there is an error. Try again.\n*Note:* {e}", parse_mode="markdown")
     except Exception as e:
-        bot.reply_to(message, "Query cannot be parsed, am truly sorry :'(")
+        logging.warning(f'WILDCARD: {e}')
+        bot.reply_to(message, "Something wrong happened, am truly sorry :'(")
 
 if __name__ == "__main__":
     print("Press CTRL + C to kill the bot")

@@ -57,7 +57,6 @@ class timeout:
         try:
             self.thisthread.kill()
         except Exception as e:
-            print(str(e))
             self.terminatefun()
 
     def __enter__(self):
