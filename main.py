@@ -91,7 +91,7 @@ if __name__ == "__main__":
             "Other supported runes:",
             "- `cs1010s(rune)`, generates a CS1010S-shaped rune art",
             "- `number(n, rune)`, our newest number system",
-            "- `qr(bytes)`"
+            "- `qr(bytes)`",
             "- `chess()`, build a chessboard with just runes",
             "- `pawn_bb`",
             "- `rook_bb`",
