@@ -639,7 +639,7 @@ def save_image(filename):
 def save_hollusion(filename):
     if graphics.PIL_available:
         if active_hollusion == None:
-            raise("No hollusion active")
+            raise Exception("No hollusion active")
         else:
             filename += ".gif"
             frames = list(map(lambda vp: graphics.get_image(vp), active_hollusion("buffer")))

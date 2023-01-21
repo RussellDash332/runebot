@@ -1,6 +1,11 @@
 from env import TOKEN
 from runes import *
-import os, telebot, hashlib, json
+import os, telebot, hashlib, json, logging
+from timeout import timeout, thread_with_trace
+
+logger = telebot.logger
+telebot.logger.setLevel(logging.INFO)
+logging.getLogger().setLevel(logging.INFO)
 
 error_msg = "I smell a sense of power abuse. Fix the keywords :\")"
 # For now it's a blacklist instead of whitelist
@@ -23,8 +28,16 @@ except:
     pass
 
 bot = telebot.TeleBot(TOKEN)
+telebot.apihelper.SESSION_TIME_TO_LIVE = 5 * 60
+
+def run_thread(t, fn, rune, tle):
+    # Set timeout to 10 seconds
+    with timeout(thread=t, terminatefun=lambda: None, seconds=10):
+        fn(rune)
+        tle[0] = False
 
 def compile(message, fn):
+    logging.info(message.__dict__['json'])
     try:
         clear_all()
         try:
@@ -33,7 +46,13 @@ def compile(message, fn):
                 raise Exception(error_msg)
             rune = eval(cmd, globals())
 
-            fn(rune)
+            tle = [True]
+            t = thread_with_trace(target=run_thread, args=(fn, rune, tle), handler=TimeoutError("Ran out of time"))
+            t.start()
+            t.join()
+            if tle[0]:
+                raise Exception('Rune processing too long :(')
+
             if fn != hollusion:
                 bot.send_photo(message.chat.id, vp[1], caption=f'`{cmd}`', parse_mode="markdown")
             else:
