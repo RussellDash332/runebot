@@ -7,14 +7,7 @@ logger = telebot.logger
 telebot.logger.setLevel(logging.INFO)
 logging.getLogger().setLevel(logging.INFO)
 
-error_msg = "I smell a sense of power abuse. Fix the keywords :\")"
 # For now it's a blacklist instead of whitelist
-bans = ["exec", "eval", "import", "with", "code",
-        "open", "close", "globals", "exit", "locals",
-        "print", "quit", "super", "vars", "name", "main",
-        "doc", "package", "loader", "class", "debug", "raise",
-        "input", "dir", "try", "except", "staticmethod", "help",
-        "builtin", "attr"]
 def overlap(arr, string):
     for i in arr:
         if i in string:
@@ -42,8 +35,16 @@ def compile(message, fn):
         clear_all()
         try:
             cmd = message.text.strip()
+            # Bad security but whatever
+            bans = ["exec", "eval", "import", "with", "code",
+                "open", "close", "globals", "exit", "locals",
+                "print", "quit", "super", "vars", "name", "main",
+                "doc", "package", "loader", "class", "debug", "raise",
+                "input", "dir", "try", "except", "staticmethod", "help",
+                "builtin", "attr", "bans", "clear", "os", "subprocess", "time"
+                "sleep", "remove", "mkdir", "inspect"]
             if overlap(bans, cmd):
-                raise Exception(error_msg)
+                raise Exception("I smell a sense of power abuse. Fix the keywords :\")")
             rune = eval(cmd, globals())
 
             tle = [True]
