@@ -43,8 +43,8 @@ def compile(message, fn):
                 "print", "quit", "super", "vars", "name", "main",
                 "doc", "package", "loader", "class", "debug", "raise",
                 "input", "dir", "try", "except", "staticmethod", "help",
-                "builtin", "attr", "bans", "clear", "os", "subprocess", "time"
-                "sleep", "remove", "mkdir", "inspect"]
+                "builtin", "attr", "bans", "clear", "os.", "subprocess", "time"
+                "sleep", "remove", "inspect"]
             if overlap(bans, cmd):
                 raise Exception("I smell a sense of power abuse. Fix the keywords :\")")
             rune = eval(cmd, globals())
