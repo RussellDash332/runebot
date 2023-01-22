@@ -84,7 +84,7 @@ if __name__ == "__main__":
     @bot.message_handler(commands=['start'])
     def show_welcome(message):
         welcome_txt = [
-            "*Welcome to the official Rune Compiler Bot! (v3.0.1)*",
+            "*Welcome to the official Rune Compiler Bot! (v3.0.2)*",
             "",
             "Compile your rune here! Here's how to use them:",
             "/show to just show the rune without any special effect",
